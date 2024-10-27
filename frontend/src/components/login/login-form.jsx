@@ -1,5 +1,7 @@
 import { useRef } from "react";
 
+import { toast } from "react-toastify";
+
 const LoginForm = () => {
     const email = useRef();
     const password = useRef();
@@ -7,13 +9,7 @@ const LoginForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const enteredEmail = email.current.value;
-        const enteredPassword = password.current.value;
-
-        alert("email: " + enteredEmail);
-        alert("password: " + enteredPassword);
-
-        // event.target.reset();
+        toast.info("Login feature is being developed.");
     };
 
     return (

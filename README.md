@@ -6,7 +6,7 @@
 
 ## Tech stack
 
--   Front-end: React, Tailwind CSS, Axios
+-   Front-end: React, Tailwind CSS
 -   Back-end: NestJS
 -   Database: MongoDB
 
@@ -43,12 +43,12 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         </tr>
         <tr>
             <td>API Integration</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <tr>
             <td>User Experience</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <!-- PUBLIC HOST -->
@@ -60,7 +60,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <!-- TOTAL PT. -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>6</strong></td>
+            <td align=center><strong>10</strong></td>
         </tr>
     </tbody>
 </table>
