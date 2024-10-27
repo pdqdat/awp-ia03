@@ -6,9 +6,9 @@
 
 ## Tech stack
 
--   Front-end: React, Tailwind CSS, Tailwind UI, Axios
+-   Front-end: React, Tailwind CSS, Axios
 -   Back-end: NestJS
--   Database: PostgreSQL
+-   Database: MongoDB
 
 ## Self evaluation
 

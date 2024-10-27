@@ -17,7 +17,7 @@ const RegisterPage = () => {
                         />
                     </Link>
 
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9">
+                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
                         Create an account
                     </h2>
                 </div>
@@ -37,6 +37,7 @@ const RegisterPage = () => {
                 </div>
             </div>
 
+            {/* Background clip path */}
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -49,7 +50,6 @@ const RegisterPage = () => {
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                 />
             </div>
-
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
