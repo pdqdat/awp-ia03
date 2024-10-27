@@ -26,12 +26,12 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <tr>
             <td rowspan=2>Back-end</td>
             <td>API Endpoints</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <tr>
             <td>Error Handling</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <!-- FRONT-END -->
@@ -60,7 +60,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <!-- TOTAL PT. -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>2</strong></td>
+            <td align=center><strong>6</strong></td>
         </tr>
     </tbody>
 </table>
