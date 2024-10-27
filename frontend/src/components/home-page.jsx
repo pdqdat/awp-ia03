@@ -12,7 +12,10 @@ const HomePage = () => {
                 >
                     <div className="flex lg:flex-1">
                         <Link to="/" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Dat Phan</span>
+                            <span className="sr-only">
+                                User Registration API
+                            </span>
+                            
                             <img
                                 alt="React logo"
                                 src={reactSvg}
@@ -25,7 +28,7 @@ const HomePage = () => {
                         <a
                             href="https://github.com/pdqdat/awp-ia03"
                             target="_blank"
-                            className="font-semibold leading-6 text-gray-900"
+                            className="font-semibold leading-6 text-gray-900 duration-300 ease-in-out hover:tracking-widest"
                         >
                             Github <span aria-hidden="true">&rarr;</span>
                         </a>
@@ -52,7 +55,7 @@ const HomePage = () => {
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 to="/register"
-                                className="rounded-md bg-purple-500 px-3.5 py-2.5 font-semibold text-white shadow-sm hover:bg-purple-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                                className="rounded-md bg-purple-500 px-3.5 py-2 font-semibold text-white shadow-sm hover:bg-purple-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                             >
                                 Create an account
                             </Link>
@@ -67,6 +70,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
+                {/* Background clip path */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -79,7 +83,6 @@ const HomePage = () => {
                         className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     />
                 </div>
-
                 <div
                     aria-hidden="true"
                     className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
