@@ -1,3 +1,4 @@
+import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import forms from "@tailwindcss/forms";
 
@@ -7,29 +8,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "var(--background)",
-                foreground: "var(--foreground)",
-
-                primary: {
-                    DEFAULT: "var(--primary)",
-                    hover: "var(--primary-hover)",
-                },
-
-                secondary: {
-                    DEFAULT: "var(--secondary)",
-                    hover: "var(--secondary-hover)",
-                },
-
-                destructive: "var(--destructive)",
-
-                border: {
-                    DEFAULT: "var(--border)",
-                    dark: "var(--border-dark)",
-                },
-            },
-            animation: {
-                "spin-slow": "spin 3s linear infinite",
-                text: "text 5s ease infinite",
+                primary: colors.purple[600],
+                hover: colors.purple[500],
             },
             keyframes: {
                 text: {
@@ -42,6 +22,10 @@ export default {
                         "background-position": "right center",
                     },
                 },
+            },
+            animation: {
+                "spin-slow": "spin 3s linear infinite",
+                text: "text 5s ease infinite",
             },
         },
     },

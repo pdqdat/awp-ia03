@@ -8,7 +8,7 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe());
 
     app.enableCors({
-        origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
+        origin: ["https://ia3auth.vercel.app/", "http://localhost:5173"],
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     });
 

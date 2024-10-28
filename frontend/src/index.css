@@ -6,20 +6,6 @@
     :root {
         --background: #ffffff;
         --foreground: #213547;
-        
-        /* --background: #242424; */
-        /* --foreground: #ffffffde; */
-
-        --primary: #646cff;
-        --primary-hover: #535bf2;
-
-        --secondary: #f3f4f6;
-        --secondary-hover: #f3f4f6e6;
-
-        --destructive: #ef4444;
-
-        --border: #e5e7eb;
-        --border-dark: #6b7280;
     }
 }
 

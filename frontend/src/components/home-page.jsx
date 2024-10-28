@@ -15,7 +15,7 @@ const HomePage = () => {
                             <span className="sr-only">
                                 User Registration API
                             </span>
-                            
+
                             <img
                                 alt="React logo"
                                 src={reactSvg}
@@ -39,23 +39,22 @@ const HomePage = () => {
             <div className="relative isolate px-6 pt-14 lg:px-8">
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div className="text-center">
-                        <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+                        <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 md:text-7xl">
                             React Frontend for
                         </h1>
 
-                        <h1 className="animate-text text-balance bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-5xl font-semibold tracking-tight text-transparent sm:text-7xl">
+                        <h1 className="h-14 animate-text text-balance bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-5xl font-semibold tracking-tight text-transparent md:h-[5.5rem] md:text-7xl">
                             User Registration API
                         </h1>
 
-                        <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-                            IA03 assessment for Advanced Web Programming course
-                            at HCMUS
+                        <p className="mt-4 text-pretty text-lg font-medium text-gray-500 md:mt-8 md:text-xl/8">
+                            A simple demo for a NestJS user registration API 
                         </p>
 
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 to="/register"
-                                className="rounded-md bg-purple-500 px-3.5 py-2 font-semibold text-white shadow-sm hover:bg-purple-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                                className="animate-text rounded-md bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 px-3.5 py-2 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Create an account
                             </Link>

@@ -20,6 +20,7 @@ const RegisterForm = () => {
 
         setIsLoading(true);
 
+        // Send a POST request to the `/user/register` endpoint to register a new user
         axios
             .post(
                 `http://${import.meta.env.VITE_BACKEND_URL}/user/register`,
@@ -34,14 +35,25 @@ const RegisterForm = () => {
                 },
             )
             .then((response) => {
+                // Dismiss all toasts (eg: previously rendered error toast) before showing new toast
+                toast.dismiss();
+
                 toast.success(response.data.message, {
                     autoClose: 3000,
                 });
+                toast(
+                    <>
+                        Your email:{" "}
+                        <span className="font-semibold text-primary">
+                            {response.data.user.email}
+                        </span>
+                    </>,
+                    {
+                        autoClose: 6000,
+                    },
+                );
 
-                toast("Your email: " + response.data.newUser.email, {
-                    autoClose: 6000,
-                });
-
+                // Clear the form inputs
                 event.target.reset();
             })
             .catch((error) => {
@@ -51,18 +63,29 @@ const RegisterForm = () => {
                     console.log(error.response.status);
                     console.log(error.response.data);
 
-                    toast.error(error.response.data.message, {
-                        autoClose: 3000,
-                    });
+                    // Render error message(s) from the backend
+                    if (Array.isArray(error.response.data.message)) {
+                        error.response.data.message.forEach((msg, idx) =>
+                            setTimeout(() => {
+                                msg === "email must be an email"
+                                    ? toast.error("Invalid email format")
+                                    : toast.error(msg);
+                            }, idx * 350),
+                        );
+                    } else {
+                        toast.error(error.response.data.message);
+                    }
                 } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
                     console.log(error.request);
+                    toast.error(
+                        "We are unable to process your request at the moment. Please try again later.",
+                    );
                 } else {
                     // Something happened in setting up the request that triggered an Error
                     console.log("Error", error.message);
-
                     toast.error("Error", error.message);
                 }
             })
@@ -86,7 +109,7 @@ const RegisterForm = () => {
                         ref={email}
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
+                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
                         disabled={isLoading}
                     />
                 </div>
@@ -108,7 +131,7 @@ const RegisterForm = () => {
                         ref={password}
                         required
                         autoComplete="current-password"
-                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
+                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
                         disabled={isLoading}
                     />
                 </div>
@@ -117,7 +140,7 @@ const RegisterForm = () => {
             <div>
                 <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 disabled:pointer-events-none disabled:opacity-50"
+                    className="flex w-full items-center justify-center rounded-md bg-primary px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50"
                     disabled={isLoading}
                 >
                     {isLoading && (

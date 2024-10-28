@@ -8,17 +8,21 @@ const ErrorPage = () => {
 
     return (
         <div className="relative isolate bg-white">
-            <div className="container flex min-h-72 flex-col items-center justify-center gap-4 text-gray-900 sm:min-h-96">
-                <h1 className="font-mono text-[100px] leading-none sm:text-[120px]">
+            <div className="container flex min-h-72 flex-col items-center justify-center gap-4 sm:min-h-96">
+                <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text font-mono text-[100px] leading-none text-transparent sm:text-[120px]">
                     404
                 </h1>
-                <p>
-                    <span className="text-purple-600">{location.pathname}</span>{" "}
+
+                <p className="text-gray-900">
+                    <span className="hover:text-hover text-primary">
+                        {location.pathname}
+                    </span>{" "}
                     could not be found
                 </p>
+
                 <Link
                     to="/"
-                    className="mt-8 text-xl font-bold duration-300 ease-in-out hover:tracking-widest"
+                    className="mt-8 animate-text rounded-md bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 px-3.5 py-2 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                     Back to Home
                 </Link>
