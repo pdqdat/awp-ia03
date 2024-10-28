@@ -12,6 +12,9 @@ import TestPage from "@comp/test-page";
 import LoginPage from "@comp/login/login-page";
 import RegisterPage from "@comp/register/register-page";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -35,5 +38,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <RouterProvider router={router} />
+        <ToastContainer />
     </StrictMode>,
 );

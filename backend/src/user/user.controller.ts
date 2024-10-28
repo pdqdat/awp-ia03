@@ -15,7 +15,10 @@ export class UserController {
             const newUser = await this.userService.createUser(createUserDto);
             return res.status(HttpStatus.OK).json({
                 message: "User has been created successfully",
-                newUser,
+                user: {
+                    email: newUser.email,
+                    createdAt: newUser.createdAt,
+                },
             });
         } catch (error) {
             return res.status(HttpStatus.BAD_REQUEST).json({

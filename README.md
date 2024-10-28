@@ -6,9 +6,54 @@
 
 ## Tech stack
 
--   Front-end: React, Tailwind CSS, Axios
+-   Front-end: React, Tailwind CSS
 -   Back-end: NestJS
 -   Database: MongoDB
+
+## How to run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/pdqdat/awp-ia03.git
+```
+
+Create a MongoDB database on your machine or use a cloud service like MongoDB Atlas. You don't need to create any collection in your database, as the application will automatically create the `users` collection when the server starts.
+
+Configure the environment variables in the `backend/.env.development` file with your MongoDB database connection string and database name:
+
+```env
+PORT=8080
+
+MONGODB_CONNECTION_STRING=
+MONGODB_DATABASE_NAME=
+```
+
+The `frontend/.env.development` file has been pre-configured to connect to the back-end server at `localhost:8080`:
+
+```env
+VITE_BACKEND_URL="localhost:8080"
+```
+
+Install the dependencies, then run the Back-end server:
+
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+In another terminal, install the dependencies, then run the Front-end server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open your browser and navigate to `http://localhost:3000` to access the application.
+
+You can visit the deployed version at [https://ia3auth.vercel.app/](https://ia3auth.vercel.app/).
 
 ## Self evaluation
 
@@ -43,12 +88,12 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         </tr>
         <tr>
             <td>API Integration</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <tr>
             <td>User Experience</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>2</td>
         </tr>
         <!-- PUBLIC HOST -->
@@ -60,7 +105,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <!-- TOTAL PT. -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>6</strong></td>
+            <td align=center><strong>10</strong></td>
         </tr>
     </tbody>
 </table>
