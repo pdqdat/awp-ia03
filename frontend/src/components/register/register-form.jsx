@@ -1,4 +1,7 @@
-import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useState, useRef } from "react";
 
 import axios from "axios";
 
@@ -6,27 +9,34 @@ import { toast } from "react-toastify";
 
 import loaderSvg from "@/assets/loader.svg";
 
+import FormField from "@comp/form-field";
+
+import schema from "@/lib/schema";
+
 const RegisterForm = () => {
-    const email = useRef();
-    const password = useRef();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
+        resolver: zodResolver(schema),
+    });
 
     const [isLoading, setIsLoading] = useState(false);
+    const toastId = useRef(null);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const enteredEmail = email.current.value;
-        const enteredPassword = password.current.value;
-
+    const onSubmit = (data) => {
         setIsLoading(true);
+        toastId.current = toast.loading("Creating your account...");
 
         // Send a POST request to the `/user/register` endpoint to register a new user
         axios
             .post(
                 `http://${import.meta.env.VITE_BACKEND_URL}/user/register`,
                 {
-                    email: enteredEmail,
-                    password: enteredPassword,
+                    email: data.email,
+                    password: data.password,
                 },
                 {
                     headers: {
@@ -35,10 +45,10 @@ const RegisterForm = () => {
                 },
             )
             .then((response) => {
-                // Dismiss all toasts (eg: previously rendered error toast) before showing new toast
-                toast.dismiss();
-
-                toast.success(response.data.message, {
+                toast.update(toastId.current, {
+                    render: response.data.message,
+                    type: "success",
+                    isLoading: false,
                     autoClose: 3000,
                 });
                 toast(
@@ -54,7 +64,7 @@ const RegisterForm = () => {
                 );
 
                 // Clear the form inputs
-                event.target.reset();
+                reset();
             })
             .catch((error) => {
                 if (error.response) {
@@ -63,30 +73,37 @@ const RegisterForm = () => {
                     console.log(error.response.status);
                     console.log(error.response.data);
 
-                    // Render error message(s) from the backend
-                    if (Array.isArray(error.response.data.message)) {
-                        error.response.data.message.forEach((msg, idx) =>
-                            setTimeout(() => {
-                                msg === "email must be an email"
-                                    ? toast.error("Invalid email format")
-                                    : toast.error(msg);
-                            }, idx * 350),
-                        );
-                    } else {
-                        toast.error(error.response.data.message);
-                    }
+                    // Render error message from the backend
+                    toast.update(toastId.current, {
+                        render: error.response.data.message,
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 6000,
+                    });
                 } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
                     console.log(error.request);
-                    toast.error(
-                        "We are unable to process your request at the moment. Please try again later.",
-                    );
+                    // toast.error(
+                    //     "We are unable to process your request at the moment. Please try again later.",
+                    // );
+                    toast.update(toastId.current, {
+                        render: "We are unable to process your request at the moment. Please try again later.",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 6000,
+                    });
                 } else {
                     // Something happened in setting up the request that triggered an Error
                     console.log("Error", error.message);
-                    toast.error("Error", error.message);
+                    // toast.error("Error", error.message);
+                    toast.update(toastId.current, {
+                        render: error.message,
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 6000,
+                    });
                 }
             })
             .finally(() => {
@@ -95,47 +112,28 @@ const RegisterForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 text-gray-900">
-            <div>
-                <label htmlFor="email" className="block font-medium leading-6">
-                    Email
-                </label>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="datphan@gmail.com"
+                register={register}
+                error={errors.email}
+                autoComplete="email"
+                disabled={isLoading}
+            />
 
-                <div className="mt-2">
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        ref={email}
-                        required
-                        autoComplete="email"
-                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
-                        disabled={isLoading}
-                    />
-                </div>
-            </div>
-
-            <div>
-                <label
-                    htmlFor="password"
-                    className="block font-medium leading-6"
-                >
-                    Password
-                </label>
-
-                <div className="mt-2">
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        ref={password}
-                        required
-                        autoComplete="current-password"
-                        className="block w-full rounded-md border-0 px-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:leading-6"
-                        disabled={isLoading}
-                    />
-                </div>
-            </div>
+            <FormField
+                label="Password"
+                name="password"
+                type="password"
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                register={register}
+                error={errors.password}
+                autoComplete="current-password"
+                disabled={isLoading}
+            />
 
             <div>
                 <button

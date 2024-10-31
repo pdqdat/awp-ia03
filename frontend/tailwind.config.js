@@ -10,6 +10,7 @@ export default {
             colors: {
                 primary: colors.purple[600],
                 hover: colors.purple[500],
+                error: colors.red[500],
             },
             keyframes: {
                 text: {

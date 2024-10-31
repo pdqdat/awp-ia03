@@ -20,10 +20,6 @@ const LoginPage = () => {
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
                         Login
                     </h2>
-
-                    <p className="mt-2 text-center">
-                        &#9432; Login feature is being developed
-                    </p>
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
