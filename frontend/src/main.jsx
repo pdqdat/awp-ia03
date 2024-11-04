@@ -12,7 +12,6 @@ import HomePage from "@comp/home-page";
 import ErrorPage from "@comp/error-page";
 import ProfilePage from "@comp/profile-page";
 import TestPage from "@comp/test-page";
-
 import LoginPage from "@comp/login/login-page";
 import RegisterPage from "@comp/register/register-page";
 
@@ -56,6 +55,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <RouterProvider router={router} />
+
         <ToastContainer />
     </StrictMode>,
 );

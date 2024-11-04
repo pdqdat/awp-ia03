@@ -6,7 +6,7 @@ import {
     Length,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { minPasswordLength, maxPasswordLength } from "src/const";
+import { minPasswordLength, maxPasswordLength } from "src/lib/const";
 
 export class CreateUserDto {
     @IsNotEmpty()

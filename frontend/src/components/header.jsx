@@ -2,8 +2,24 @@ import { Link } from "react-router-dom";
 
 import PageLogo from "@comp/page-logo";
 
+import useAuthStore from "@/store/auth-store";
+
+import { appName } from "@lib/const";
+
+import userSvg from "@/assets/user.svg";
+import logOutSvg from "@/assets/log-out.svg";
+
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
-    const isLoggedIn = true;
+    const { isAuthenticated, logout } = useAuthStore();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate("/");
+
+        logout();
+    };
 
     return (
         <header className="absolute inset-x-0 top-0 z-50">
@@ -13,7 +29,7 @@ const Header = () => {
             >
                 <div className="flex lg:flex-1">
                     <Link to="/" className="-m-1.5 p-1.5">
-                        <span className="sr-only">User Registration API</span>
+                        <span className="sr-only">{appName}</span>
 
                         <PageLogo />
                     </Link>
@@ -31,17 +47,21 @@ const Header = () => {
                         </span>
                     </a>
 
-                    {isLoggedIn && (
+                    {isAuthenticated && (
                         <>
                             {/* Vertical separator */}
                             <div className="h-6 w-0.5 rounded-md bg-gray-300" />
 
-                            <Link to="/profile" className="primary-btn px-5">
-                                Profile
+                            <Link to="/profile" className="primary-btn px-1.5">
+                                <img src={userSvg} className="h-5 w-5" />
                             </Link>
 
-                            <button className="secondary-btn" type="button">
-                                Logout
+                            <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="transition-color secondary-btn bg-transparent px-1.5 shadow-none hover:bg-gray-200"
+                            >
+                                <img src={logOutSvg} className="h-5 w-5" />
                             </button>
                         </>
                     )}

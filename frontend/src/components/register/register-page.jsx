@@ -4,8 +4,23 @@ import PageLogo from "@comp/page-logo";
 import PageTitle from "@comp/page-title";
 import RegisterForm from "@comp/register/register-form";
 
+import { useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import useAuthStore from "@/store/auth-store";
+
 const RegisterPage = () => {
     const pageTitle = "Create new account";
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuthStore();
+
+    useEffect(() => {
+        // Redirect to the home page if the user is already authenticated
+        if (isAuthenticated) {
+            navigate("/");
+        }
+    }, [isAuthenticated, navigate]);
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

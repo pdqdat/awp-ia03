@@ -71,9 +71,9 @@ Detailed version of the requirements can be found [here](https://docs.google.com
     </thead>
     <tbody >
         <tr>
-            <td>API Endpoints</td>
+            <td>Registration Endpoints</td>
             <td>Works perfectly, validations and hashing are correct</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>0.5</td>
         </tr>
         <tr>
@@ -115,19 +115,19 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <tr>
             <td>Home page</td>
             <td>Display content based on authentication status</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
             <td>Frontend Form Handling</td>
             <td>All forms work smoothly, good UX with error handling</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
             <td>State Management</td>
             <td>State managed well, token and user info updated smoothly</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
@@ -145,7 +145,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <!-- TOTAL SCORE -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>3</strong></td>
+            <td align=center><strong>6.5</strong></td>
         </tr>
     </tbody>
 </table>

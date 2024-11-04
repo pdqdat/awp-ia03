@@ -14,17 +14,26 @@ import { emailPlaceholder } from "@lib/const";
 
 import axios from "axios";
 
+import useAuthStore from "@/store/auth-store";
+
+import { useNavigate } from "react-router-dom";
+
 const LoginForm = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({
         resolver: zodResolver(schema),
     });
 
     const [isLoading, setIsLoading] = useState(false);
     const toastId = useRef(null);
+
+    const { login } = useAuthStore();
+
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -46,11 +55,19 @@ const LoginForm = () => {
             )
             .then((response) => {
                 toast.update(toastId.current, {
-                    render: response.data.message,
+                    render: "You have logged in successfully. Welcome to the app 🎉",
                     type: "success",
                     isLoading: false,
-                    autoClose: 3000,
+                    autoClose: 4000,
                 });
+
+                login(response.data.accessToken);
+
+                // Clear the form inputs
+                reset();
+
+                // Redirect to the home page
+                navigate("/");
             })
             .catch((error) => {
                 toast.update(toastId.current, {

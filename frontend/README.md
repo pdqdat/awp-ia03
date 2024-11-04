@@ -4,7 +4,7 @@
 
 -   React (built with Vite)
 -   Tailwind CSS
--   Redux
+-   Zustand
 -   Axios
 -   React Router
 -   React Hook Form
