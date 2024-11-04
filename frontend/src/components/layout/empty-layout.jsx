@@ -1,31 +1,9 @@
-import { useRouteError, useLocation, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-import PageTitle from "@comp/page-title";
-
-const ErrorPage = () => {
-    const error = useRouteError();
-    console.log(error);
-
-    const location = useLocation();
-
+const EmptyLayout = () => {
     return (
         <div className="relative isolate bg-white">
-            <div className="container flex min-h-72 flex-col items-center justify-center gap-4 sm:min-h-96">
-                <PageTitle title="404" />
-
-                <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text font-mono text-[100px] leading-none text-transparent sm:text-[120px]">
-                    404
-                </h1>
-
-                <p className="text-gray-900">
-                    <span className="primary-link">{location.pathname}</span>{" "}
-                    could not be found
-                </p>
-
-                <Link to="/" className="beautiful-btn mt-8">
-                    Back to Home
-                </Link>
-            </div>
+            <Outlet />
 
             {/* Background clip path */}
             <div
@@ -56,4 +34,4 @@ const ErrorPage = () => {
     );
 };
 
-export default ErrorPage;
+export default EmptyLayout;

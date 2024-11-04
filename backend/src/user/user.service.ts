@@ -3,14 +3,10 @@ import {
     NotFoundException,
     ConflictException,
 } from "@nestjs/common";
-
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-
 import { IUser } from "src/interface/user.interface";
-
 import { CreateUserDto } from "./dto/create-user.dto";
-
 import * as bcrypt from "bcrypt";
 
 @Injectable()

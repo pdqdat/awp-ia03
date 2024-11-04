@@ -1,13 +1,13 @@
-# HCMUS Advanced Web App Programming
+# User Authentication System
 
-## IA03 - User Registration API with React Frontend
+A full-stack authentication system using JWT to secure user login and registration.
 
-20120268 - Phan Duong Quoc Dat
+Built by **Phan Duong Quoc Dat - 20120268** for IA03 and IA04 assessment of the **Advanced Web App Development** course at **HCMUS**.
 
 ## Tech stack
 
 -   Front-end: React, Tailwind CSS
--   Back-end: NestJS
+-   Back-end: NestJS, JWT
 -   Database: MongoDB
 
 ## How to run
@@ -20,13 +20,15 @@ git clone https://github.com/pdqdat/awp-ia03.git
 
 Create a MongoDB database on your machine or use a cloud service like MongoDB Atlas. You don't need to create any collection in your database, as the application will automatically create the `users` collection when the server starts.
 
-Configure the environment variables in the `backend/.env.development` file with your MongoDB database connection string and database name:
+Configure the environment variables in the `backend/.env.development` file with your MongoDB database connection string, database name, and a secret key for JWT:
 
 ```env
 PORT=8080
 
 MONGODB_CONNECTION_STRING=
 MONGODB_DATABASE_NAME=
+
+JWT_SECRET=
 ```
 
 The `frontend/.env.development` file has been pre-configured to connect to the back-end server at `localhost:8080`:
@@ -51,61 +53,99 @@ npm install
 npm run dev
 ```
 
-Open your browser and navigate to `http://localhost:3000` to access the application.
+Open your browser and navigate to `http://localhost:5173` to access the application.
 
 You can visit the deployed version at [https://nestjsauth.vercel.app/](https://nestjsauth.vercel.app/).
 
 ## Self evaluation for IA04
 
-Detailed version of the requirements can be found [here](https://docs.google.com/document/d/1sZRlRK7f_1cvWuEVaVSnjuCeWNxuPUvw3_SHHeJQzqY/edit?usp=sharing).
+Detailed version of the requirements can be found [here](https://docs.google.com/document/d/14nGcUmv1VdnLEIB_3o0JuPAbFP4Pjf-FqYyTVVgc-vU/edit?tab=t.0).
 
 <table>
     <thead>
         <tr>
-            <th colspan=3>Rubrics</th>
-            <th>Pt.</th>
+            <th>Criteria</th>
+            <th colspan=2>Description</th>
+            <th>Score</th>
         </tr>
     </thead>
     <tbody >
-        <!-- BACK-END -->
         <tr>
-            <td rowspan=2>Back-end</td>
             <td>API Endpoints</td>
-            <td>&check;</td>
-            <td align=center>2</td>
+            <td>Works perfectly, validations and hashing are correct</td>
+            <td>&cross;</td>
+            <td align=center>0.5</td>
         </tr>
         <tr>
-            <td>Error Handling</td>
-            <td>&check;</td>
-            <td align=center>2</td>
+            <td>Login Endpoint</td>
+            <td>Works correctly, token generated and returned</td>
+            <td>&cross;</td>
+            <td align=center>0.5</td>
         </tr>
-        <!-- FRONT-END -->
         <tr>
-          <td rowspan=3>Front-end</td>
-            <td>Routing</td>
+            <td>JWT Token Validation</td>
+            <td>Proper middleware with token verification on protected routes</td>
+            <td>&cross;</td>
+            <td align=center>0.5</td>
+        </tr>
+        <tr>
+            <td>Profile (Protected Route)</td>
+            <td>Protected route works, only accessible with valid token</td>
+            <td>&cross;</td>
+            <td align=center>0.5</td>
+        </tr>
+        <tr>
+            <td>Register page</td>
+            <td></td>
             <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
-            <td>API Integration</td>
-            <td>&check;</td>
-            <td align=center>2</td>
-        </tr>
-        <tr>
-            <td>User Experience</td>
-            <td>&check;</td>
-            <td align=center>2</td>
-        </tr>
-        <!-- PUBLIC HOST -->
-        <tr>
-            <td colspan=2>Public Host Deployment</td>
+            <td>Login page</td>
+            <td></td>
             <td>&check;</td>
             <td align=center>1</td>
         </tr>
-        <!-- TOTAL PT. -->
+        <tr>
+            <td>Profile page</td>
+            <td></td>
+            <td>&cross;</td>
+            <td align=center>1</td>
+        </tr>
+        <tr>
+            <td>Home page</td>
+            <td>Display content based on authentication status</td>
+            <td>&cross;</td>
+            <td align=center>1</td>
+        </tr>
+        <tr>
+            <td>Frontend Form Handling</td>
+            <td>All forms work smoothly, good UX with error handling</td>
+            <td>&cross;</td>
+            <td align=center>1</td>
+        </tr>
+        <tr>
+            <td>State Management</td>
+            <td>State managed well, token and user info updated smoothly</td>
+            <td>&cross;</td>
+            <td align=center>1</td>
+        </tr>
+        <tr>
+            <td>Error Handling & Feedback</td>
+            <td>Comprehensive error handling, clear user feedback</td>
+            <td>&cross;</td>
+            <td align=center>1</td>
+        </tr>
+        <tr>
+            <td>Public Host</td>
+            <td>Public host deployment</td>
+            <td>&check;</td>
+            <td align=center>1</td>
+        </tr>
+        <!-- TOTAL SCORE -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>0</strong></td>
+            <td align=center><strong>3</strong></td>
         </tr>
     </tbody>
 </table>
@@ -168,5 +208,4 @@ Detailed version of the requirements can be found [here](https://docs.google.com
 ## References
 
 -   [Tailwind CSS Documentation](https://tailwindcss.com/docs/)
--   [Tailwind UI](https://tailwindui.com/)
 -   [Nestjs Documentation](https://docs.nestjs.com/)

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { toast } from "react-toastify";
 
@@ -9,7 +9,10 @@ import loaderSvg from "@/assets/loader.svg";
 
 import FormField from "@comp/form-field";
 
-import schema from "@/lib/schema";
+import schema from "@lib/schema";
+import { emailPlaceholder } from "@lib/const";
+
+import axios from "axios";
 
 const LoginForm = () => {
     const {
@@ -21,20 +24,45 @@ const LoginForm = () => {
     });
 
     const [isLoading, setIsLoading] = useState(false);
+    const toastId = useRef(null);
 
     const onSubmit = (data) => {
         setIsLoading(true);
+        toastId.current = toast.loading("Logging in...");
 
-        const resolveAfter3Sec = new Promise((resolve) =>
-            setTimeout(resolve, 1500),
-        );
-        toast.promise(resolveAfter3Sec, {
-            pending: "Logging in...",
-            success: `Email: ${data.email}, password: ${data.password}`,
-            error: "Failed 🤯",
-        });
-
-        setIsLoading(false);
+        // Send a POST request to the `/auth/login` endpoint
+        axios
+            .post(
+                `http://${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+                {
+                    email: data.email,
+                    password: data.password,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            )
+            .then((response) => {
+                toast.update(toastId.current, {
+                    render: response.data.message,
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 3000,
+                });
+            })
+            .catch((error) => {
+                toast.update(toastId.current, {
+                    render: error.response.data.message,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 3000,
+                });
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 
     return (
@@ -43,7 +71,7 @@ const LoginForm = () => {
                 label="Email"
                 name="email"
                 type="email"
-                placeholder="pd.quocdat@gmail.com"
+                placeholder={emailPlaceholder}
                 register={register}
                 error={errors.email}
                 autoComplete="email"
@@ -64,7 +92,7 @@ const LoginForm = () => {
             <div>
                 <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md bg-primary px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50"
+                    className="primary-btn w-full"
                     disabled={isLoading}
                 >
                     {isLoading && (

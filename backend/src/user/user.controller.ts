@@ -8,11 +8,12 @@ import { UserService } from "./user.service";
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    // Endpoint: /user/register
+    //* ENDPOINT: /user/register
     @Post("register")
     async createUser(@Body() createUserDto: CreateUserDto, @Res() res) {
         try {
             const newUser = await this.userService.createUser(createUserDto);
+            
             return res.status(HttpStatus.OK).json({
                 message: "User has been created successfully",
                 user: {
@@ -29,11 +30,28 @@ export class UserController {
         }
     }
 
-    // Endpoint: /user
+    //* ENDPOINT: /user/profile
+    @Get("profile")
+    async getProfile(@Res() res) {
+        try {
+            return res.status(HttpStatus.OK).json({
+                message: "Profile detail from the backend",
+            });
+        } catch (error) {
+            return res.status(HttpStatus.BAD_REQUEST).json({
+                message: "Error: No user found!",
+                error: "Bad Request",
+                statusCode: 400,
+            });
+        }
+    }
+
+    //* ENDPOINT: /user
     @Get()
     async getAllUsers(@Res() res) {
         try {
             const users = await this.userService.getAllUsers();
+
             return res.status(HttpStatus.OK).json({
                 message: "Users fetched successfully",
                 users,

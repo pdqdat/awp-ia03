@@ -1,16 +1,18 @@
 import * as z from "zod";
 
+import { passwordMinLength, passwordMaxLength } from "@lib/const";
+
 const schema = z.object({
     email: z.string().email({
         message: "Invalid email address",
     }),
     password: z
         .string()
-        .min(3, {
-            message: "Password must be at least 3 characters long",
+        .min(passwordMinLength, {
+            message: `Password must be at least ${passwordMinLength} characters long`,
         })
-        .max(20, {
-            message: "Password can not be more than 20 characters long",
+        .max(passwordMaxLength, {
+            message: `Password can not be more than ${passwordMaxLength} characters long`,
         }),
 });
 

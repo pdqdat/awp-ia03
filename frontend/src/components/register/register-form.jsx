@@ -8,10 +8,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import loaderSvg from "@/assets/loader.svg";
+import copySvg from "@/assets/copy.svg";
 
 import FormField from "@comp/form-field";
 
-import schema from "@/lib/schema";
+import schema from "@lib/schema";
+import { emailPlaceholder } from "@lib/const";
+
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
     const {
@@ -25,6 +29,8 @@ const RegisterForm = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const toastId = useRef(null);
+
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -51,20 +57,36 @@ const RegisterForm = () => {
                     isLoading: false,
                     autoClose: 3000,
                 });
+
+                // Render a toast message with the user's email and a button to copy the email to the clipboard
                 toast(
                     <>
-                        Your email:{" "}
+                        You&apos;re now in the Login page, here&apos;s your
+                        email:{" "}
                         <span className="font-semibold text-primary">
                             {response.data.user.email}
-                        </span>
+                        </span>{" "}
+                        <button
+                            onClick={() =>
+                                navigator.clipboard.writeText(
+                                    response.data.user.email,
+                                )
+                            }
+                            className="ml-1 duration-300 ease-in-out hover:scale-110"
+                        >
+                            <img src={copySvg} className="h-3.5 w-3.5" />
+                        </button>
                     </>,
                     {
-                        autoClose: 6000,
+                        autoClose: 8000,
                     },
                 );
 
                 // Clear the form inputs
                 reset();
+
+                // Redirect to the login page
+                navigate("/login");
             })
             .catch((error) => {
                 if (error.response) {
@@ -85,9 +107,6 @@ const RegisterForm = () => {
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
                     console.log(error.request);
-                    // toast.error(
-                    //     "We are unable to process your request at the moment. Please try again later.",
-                    // );
                     toast.update(toastId.current, {
                         render: "We are unable to process your request at the moment. Please try again later.",
                         type: "error",
@@ -97,7 +116,6 @@ const RegisterForm = () => {
                 } else {
                     // Something happened in setting up the request that triggered an Error
                     console.log("Error", error.message);
-                    // toast.error("Error", error.message);
                     toast.update(toastId.current, {
                         render: error.message,
                         type: "error",
@@ -117,7 +135,7 @@ const RegisterForm = () => {
                 label="Email"
                 name="email"
                 type="email"
-                placeholder="datphan@gmail.com"
+                placeholder={emailPlaceholder}
                 register={register}
                 error={errors.email}
                 autoComplete="email"
@@ -138,7 +156,7 @@ const RegisterForm = () => {
             <div>
                 <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md bg-primary px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50"
+                    className="primary-btn w-full"
                     disabled={isLoading}
                 >
                     {isLoading && (

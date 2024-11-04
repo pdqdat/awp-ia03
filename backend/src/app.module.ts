@@ -9,8 +9,12 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 
 import { UserSchema } from "./user/user.schema";
+
+import { UserModule } from './user/user.module';
 import { UserService } from "./user/user.service";
 import { UserController } from "./user/user.controller";
+
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
     imports: [
@@ -52,6 +56,8 @@ import { UserController } from "./user/user.controller";
                 schema: UserSchema,
             },
         ]),
+        AuthModule,
+        UserModule,
     ],
     controllers: [AppController, UserController],
     providers: [AppService, UserService],

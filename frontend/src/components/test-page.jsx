@@ -1,3 +1,5 @@
+import PageTitle from "@comp/page-title";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -33,6 +35,8 @@ const TestPage = () => {
 
     return (
         <div className="p-4">
+            <PageTitle title="Test..." />
+
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="mx-auto flex w-1/3 flex-col gap-4 p-4"
