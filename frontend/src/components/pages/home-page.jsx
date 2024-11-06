@@ -10,7 +10,7 @@ const HomePage = () => {
     const { isAuthenticated } = useAuthStore();
 
     return (
-        <div className="container py-32 sm:py-48 lg:py-56">
+        <div className="container pt-32 sm:pt-48 lg:pt-56">
             <div className="text-center">
                 <PageTitle title={appName} />
 

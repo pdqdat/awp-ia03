@@ -6,7 +6,7 @@ Built by **Phan Duong Quoc Dat - 20120268** for IA03 and IA04 assessment of the 
 
 ## Tech stack
 
--   Front-end: React, Tailwind CSS
+-   Front-end: React, Tailwind CSS, Zustand (for state management)
 -   Back-end: NestJS, JWT
 -   Database: MongoDB
 
@@ -34,7 +34,7 @@ JWT_SECRET=
 The `frontend/.env.development` file has been pre-configured to connect to the back-end server at `localhost:8080`:
 
 ```env
-VITE_BACKEND_URL="localhost:8080"
+VITE_BACKEND_URL="http://localhost:8080"
 ```
 
 Install the dependencies, then run the Back-end server:
@@ -79,19 +79,19 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <tr>
             <td>Login Endpoint</td>
             <td>Works correctly, token generated and returned</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>0.5</td>
         </tr>
         <tr>
             <td>JWT Token Validation</td>
             <td>Proper middleware with token verification on protected routes</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>0.5</td>
         </tr>
         <tr>
             <td>Profile (Protected Route)</td>
             <td>Protected route works, only accessible with valid token</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>0.5</td>
         </tr>
         <tr>
@@ -109,7 +109,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <tr>
             <td>Profile page</td>
             <td></td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
@@ -133,7 +133,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <tr>
             <td>Error Handling & Feedback</td>
             <td>Comprehensive error handling, clear user feedback</td>
-            <td>&cross;</td>
+            <td>&check;</td>
             <td align=center>1</td>
         </tr>
         <tr>
@@ -145,7 +145,7 @@ Detailed version of the requirements can be found [here](https://docs.google.com
         <!-- TOTAL SCORE -->
         <tr>
             <td colspan=3 align=center><strong>Total</strong></td>
-            <td align=center><strong>6.5</strong></td>
+            <td align=center><strong>10</strong></td>
         </tr>
     </tbody>
 </table>

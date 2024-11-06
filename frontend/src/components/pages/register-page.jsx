@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import PageLogo from "@comp/page-logo";
 import PageTitle from "@comp/page-title";
-import RegisterForm from "@comp/register/register-form";
+import RegisterForm from "@comp/forms/register-form";
 
 import { useEffect } from "react";
 

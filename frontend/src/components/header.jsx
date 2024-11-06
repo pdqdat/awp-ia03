@@ -11,6 +11,8 @@ import logOutSvg from "@/assets/log-out.svg";
 
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 const Header = () => {
     const { isAuthenticated, logout } = useAuthStore();
     const navigate = useNavigate();
@@ -19,6 +21,11 @@ const Header = () => {
         navigate("/");
 
         logout();
+
+        // Render a toast message when the user logs out
+        toast("You have successfully logged out. Please come back soon!", {
+            autoClose: 3000,
+        });
     };
 
     return (

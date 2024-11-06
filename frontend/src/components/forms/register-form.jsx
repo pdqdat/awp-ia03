@@ -10,12 +10,48 @@ import { toast } from "react-toastify";
 import loaderSvg from "@/assets/loader.svg";
 import copySvg from "@/assets/copy.svg";
 
-import FormField from "@comp/form-field";
+import FormField from "@comp/forms/form-field";
 
-import schema from "@lib/schema";
 import { emailPlaceholder } from "@lib/const";
+import {
+    passwordMinLength,
+    passwordMaxLength,
+    fullNameMaxLength,
+    fullNamePlaceholder,
+} from "@lib/const";
 
 import { useNavigate } from "react-router-dom";
+
+import errorCodeToMsg from "@lib/error-code-to-msg";
+
+import * as z from "zod";
+
+const schema = z.object({
+    email: z
+        .string()
+        .min(1, {
+            message: "Email required",
+        })
+        .email({
+            message: "Invalid email address",
+        }),
+    fullName: z
+        .string()
+        .min(1, {
+            message: "Full name required",
+        })
+        .max(fullNameMaxLength, {
+            message: `Full name can not be more than ${fullNameMaxLength} characters long`,
+        }),
+    password: z
+        .string()
+        .min(passwordMinLength, {
+            message: `Password must be at least ${passwordMinLength} characters long`,
+        })
+        .max(passwordMaxLength, {
+            message: `Password can not be more than ${passwordMaxLength} characters long`,
+        }),
+});
 
 const RegisterForm = () => {
     const {
@@ -39,9 +75,10 @@ const RegisterForm = () => {
         // Send a POST request to the `/user/register` endpoint to register a new user
         axios
             .post(
-                `http://${import.meta.env.VITE_BACKEND_URL}/user/register`,
+                `${import.meta.env.VITE_BACKEND_URL}/user/register`,
                 {
                     email: data.email,
+                    fullName: data.fullName,
                     password: data.password,
                 },
                 {
@@ -61,8 +98,7 @@ const RegisterForm = () => {
                 // Render a toast message with the user's email and a button to copy the email to the clipboard
                 toast(
                     <>
-                        You&apos;re now in the Login page, here&apos;s your
-                        email:{" "}
+                        You can now login with your email:{" "}
                         <span className="font-semibold text-primary">
                             {response.data.user.email}
                         </span>{" "}
@@ -92,35 +128,35 @@ const RegisterForm = () => {
                 if (error.response) {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
-                    console.log(error.response.status);
+
                     console.log(error.response.data);
 
                     // Render error message from the backend
                     toast.update(toastId.current, {
-                        render: error.response.data.message,
+                        render: errorCodeToMsg(error.response.data.message),
                         type: "error",
                         isLoading: false,
-                        autoClose: 6000,
+                        autoClose: 5000,
                     });
                 } else if (error.request) {
                     // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
+
                     console.log(error.request);
                     toast.update(toastId.current, {
-                        render: "We are unable to process your request at the moment. Please try again later.",
+                        render: errorCodeToMsg("NO_RESPONSE"),
                         type: "error",
                         isLoading: false,
-                        autoClose: 6000,
+                        autoClose: 5000,
                     });
                 } else {
                     // Something happened in setting up the request that triggered an Error
+
                     console.log("Error", error.message);
                     toast.update(toastId.current, {
                         render: error.message,
                         type: "error",
                         isLoading: false,
-                        autoClose: 6000,
+                        autoClose: 5000,
                     });
                 }
             })
@@ -139,6 +175,17 @@ const RegisterForm = () => {
                 register={register}
                 error={errors.email}
                 autoComplete="email"
+                disabled={isLoading}
+            />
+
+            <FormField
+                label="Full name"
+                name="fullName"
+                type="text"
+                placeholder={fullNamePlaceholder}
+                register={register}
+                error={errors.fullName}
+                autoComplete="name"
                 disabled={isLoading}
             />
 

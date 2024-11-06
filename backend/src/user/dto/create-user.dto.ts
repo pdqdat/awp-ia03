@@ -6,12 +6,20 @@ import {
     Length,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { minPasswordLength, maxPasswordLength } from "src/lib/const";
+import {
+    minPasswordLength,
+    maxPasswordLength,
+    maxFullNameLength,
+} from "src/lib/const";
 
 export class CreateUserDto {
     @IsNotEmpty()
     @IsEmail()
     readonly email: string;
+
+    @IsNotEmpty()
+    @Length(1, maxFullNameLength)
+    readonly fullName: string;
 
     @IsNotEmpty()
     @Length(minPasswordLength, maxPasswordLength)

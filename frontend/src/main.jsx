@@ -8,12 +8,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@comp/layout/main-layout";
 import EmptyLayout from "@comp/layout/empty-layout";
 
-import HomePage from "@comp/home-page";
-import ErrorPage from "@comp/error-page";
-import ProfilePage from "@comp/profile-page";
-import TestPage from "@comp/test-page";
-import LoginPage from "@comp/login/login-page";
-import RegisterPage from "@comp/register/register-page";
+import HomePage from "@comp/pages/home-page";
+import ErrorPage from "@comp/pages/error-page";
+import ProfilePage from "@comp/pages/profile-page";
+import TestPage from "@comp/pages/test-page";
+import LoginPage from "@comp/pages/login-page";
+import RegisterPage from "@comp/pages/register-page";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

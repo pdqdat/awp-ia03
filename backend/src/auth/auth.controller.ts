@@ -2,20 +2,23 @@ import {
     Body,
     Controller,
     Post,
-    HttpCode,
     HttpStatus,
     Res,
     UseGuards,
     Get,
-    Request
+    Request,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./login.dto";
 import { AuthGuard } from "./auth.guard";
+import { UserService } from "../user/user.service";
 
 @Controller("auth")
 export class AuthController {
-    constructor(private readonly authService: AuthService) {}
+    constructor(
+        private readonly authService: AuthService,
+        private readonly userService: UserService,
+    ) {}
 
     //* ENDPOINT: /auth/login
     @Post("login")
@@ -36,7 +39,25 @@ export class AuthController {
     //* ENDPOINT: /auth/profile
     @UseGuards(AuthGuard)
     @Get("profile")
-    getProfile(@Request() req) {
-        return req.user;
+    async getProfile(@Request() req, @Res() res) {
+        try {
+            const user = await this.userService.getUserByEmail(req.user.email);
+
+            if (!user) {
+                return res.status(HttpStatus.NOT_FOUND).json({
+                    message: "User not found",
+                    error: "Not Found",
+                    statusCode: 404,
+                });
+            }
+
+            return res.status(HttpStatus.OK).json(user);
+        } catch (error) {
+            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                message: error.message,
+                error: "Internal Server Error",
+                statusCode: 500,
+            });
+        }
     }
 }

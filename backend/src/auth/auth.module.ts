@@ -21,7 +21,8 @@ import { ConfigModule } from "@nestjs/config";
             global: true,
             secret: process.env.JWT_SECRET,
             signOptions: {
-                expiresIn: "60s",
+                // The JWT token will expire in 1 hour
+                expiresIn: "3600s",
             },
         }),
         UserModule,
