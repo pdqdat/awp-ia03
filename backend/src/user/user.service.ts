@@ -1,17 +1,10 @@
-import {
-    Injectable,
-    NotFoundException,
-    ConflictException,
-} from "@nestjs/common";
-
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-
 import { IUser } from "src/interface/user.interface";
-
 import { CreateUserDto } from "./dto/create-user.dto";
-
 import * as bcrypt from "bcrypt";
+import { EmailConflictException } from "./exceptions/email-conflict.exception";
 
 @Injectable()
 export class UserService {
@@ -24,7 +17,7 @@ export class UserService {
         });
 
         if (existingUser) {
-            throw new ConflictException("Email already exists");
+            throw new EmailConflictException();
         }
 
         // Hash the password
@@ -40,13 +33,21 @@ export class UserService {
         return newUser.save();
     }
 
-    async getAllUsers(): Promise<IUser[]> {
-        const userData = await this.userModel.find();
+    async getUserByEmail(email: string): Promise<{
+        email: string;
+        fullName: string;
+        createdAt: Date;
+    } | null> {
+        const user = await this.userModel.findOne({ email: email });
 
-        if (!userData || userData.length === 0) {
-            throw new NotFoundException("No user found");
+        if (!user) {
+            return null;
         }
 
-        return userData;
+        return {
+            email: user.email,
+            fullName: user.fullName,
+            createdAt: user.createdAt,
+        };
     }
 }

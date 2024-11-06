@@ -6,6 +6,9 @@ export class User {
     email: string;
 
     @Prop({ required: true })
+    fullName: string;
+
+    @Prop({ required: true })
     password: string;
 
     @Prop({ default: Date.now })

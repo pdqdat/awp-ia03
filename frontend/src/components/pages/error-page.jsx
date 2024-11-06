@@ -1,40 +1,30 @@
-import { Link } from "react-router-dom";
+import { useRouteError, useLocation, Link } from "react-router-dom";
 
-import reactSvg from "@/assets/react.svg";
+import PageTitle from "@comp/page-title";
 
-import RegisterForm from "@comp/register/register-form";
+const ErrorPage = () => {
+    const error = useRouteError();
+    console.log(error);
 
-const RegisterPage = () => {
+    const location = useLocation();
+
     return (
         <div className="relative isolate bg-white">
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <Link to="/">
-                        <img
-                            alt="React logo"
-                            src={reactSvg}
-                            className="mx-auto h-14 w-auto animate-spin-slow"
-                        />
-                    </Link>
+            <div className="container flex min-h-72 flex-col items-center justify-center gap-4 sm:min-h-96">
+                <PageTitle title="404" />
 
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
-                        Create an account
-                    </h2>
-                </div>
+                <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text font-mono text-[100px] leading-none text-transparent sm:text-[120px]">
+                    404
+                </h1>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <RegisterForm />
+                <p className="text-gray-900">
+                    <span className="primary-link">{location.pathname}</span>{" "}
+                    could not be found
+                </p>
 
-                    <p className="mt-10 text-center text-gray-500">
-                        Already have an account?{" "}
-                        <Link
-                            to="/login"
-                            className="hover:text-hover font-semibold leading-6 text-primary"
-                        >
-                            Login
-                        </Link>
-                    </p>
-                </div>
+                <Link to="/" className="beautiful-btn mt-8">
+                    Back to Home
+                </Link>
             </div>
 
             {/* Background clip path */}
@@ -66,4 +56,4 @@ const RegisterPage = () => {
     );
 };
 
-export default RegisterPage;
+export default ErrorPage;

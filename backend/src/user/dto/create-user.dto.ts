@@ -1,5 +1,16 @@
-import { IsNotEmpty, IsEmail, IsDate, IsOptional } from "class-validator";
+import {
+    IsNotEmpty,
+    IsEmail,
+    IsDate,
+    IsOptional,
+    Length,
+} from "class-validator";
 import { Type } from "class-transformer";
+import {
+    minPasswordLength,
+    maxPasswordLength,
+    maxFullNameLength,
+} from "src/lib/const";
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -7,6 +18,11 @@ export class CreateUserDto {
     readonly email: string;
 
     @IsNotEmpty()
+    @Length(1, maxFullNameLength)
+    readonly fullName: string;
+
+    @IsNotEmpty()
+    @Length(minPasswordLength, maxPasswordLength)
     readonly password: string;
 
     @IsDate()
