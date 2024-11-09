@@ -6,7 +6,10 @@ Built by **Phan Duong Quoc Dat - 20120268** for IA03 and IA04 assessment of the 
 
 ## Tech stack
 
--   Front-end: React, Tailwind CSS, Zustand (for state management)
+-   Front-end:
+    -   React
+    -   Tailwind CSS
+    -   Zustand (for state management)
 -   Back-end: NestJS, JWT
 -   Database: MongoDB
 
