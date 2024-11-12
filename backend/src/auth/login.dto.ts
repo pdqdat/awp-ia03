@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsEmail, Length } from "class-validator";
-import { minPasswordLength, maxPasswordLength } from "src/lib/const";
+import { minPasswordLength, maxPasswordLength } from '../lib/const';
 
 export class LoginDto {
     @IsNotEmpty()

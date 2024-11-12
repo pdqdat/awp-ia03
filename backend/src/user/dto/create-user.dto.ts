@@ -10,7 +10,7 @@ import {
     minPasswordLength,
     maxPasswordLength,
     maxFullNameLength,
-} from "src/lib/const";
+} from "../../lib/const";
 
 export class CreateUserDto {
     @IsNotEmpty()
