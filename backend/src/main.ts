@@ -9,8 +9,8 @@ async function bootstrap() {
 
     app.enableCors({
         origin: [
-            "https://ia3auth.vercel.app/",
-            "https://nestjsauth.vercel.app/",
+            "https://ia3auth.vercel.app",
+            "https://nestjsauth.vercel.app",
             "http://localhost:5173",
         ],
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
