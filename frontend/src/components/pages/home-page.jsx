@@ -29,15 +29,15 @@ const HomePage = () => {
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                     {!isAuthenticated ? (
                         <>
-                            <Link to="/register" className="beautiful-btn">
-                                Create an account
-                            </Link>
-
                             <Link
                                 to="/login"
                                 className="font-semibold leading-6 text-gray-900"
                             >
                                 Login
+                            </Link>
+
+                            <Link to="/register" className="beautiful-btn">
+                                Create an account
                             </Link>
                         </>
                     ) : (

@@ -140,6 +140,7 @@ const LoginForm = () => {
                 error={errors.email}
                 autoComplete="email"
                 disabled={isLoading}
+                autoFocus
             />
 
             <FormField
