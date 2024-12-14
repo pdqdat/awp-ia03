@@ -1,6 +1,7 @@
-import Header from "@comp/header";
-
 import { Outlet } from "react-router-dom";
+
+import Header from "@comp/header";
+import Footer from "@comp/footer";
 
 const MainLayout = () => {
     return (
@@ -36,6 +37,8 @@ const MainLayout = () => {
                     />
                 </div>
             </div>
+
+            <Footer />
         </div>
     );
 };
