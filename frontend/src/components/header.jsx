@@ -44,7 +44,7 @@ const Header = () => {
 
                 <div className="flex items-center space-x-4 lg:flex-1 lg:justify-end">
                     <a
-                        href="https://github.com/pdqdat/awp-ia03"
+                        href="https://github.com/pdqdat/awad-ia34"
                         target="_blank"
                         className="font-semibold leading-6 text-gray-900 duration-300 ease-in-out hover:tracking-widest"
                     >
